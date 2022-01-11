@@ -378,8 +378,22 @@ PuppetWidgetBase::UpdateBounds(bool aRepaint)
   LayoutDeviceIntRect oldBounds = mBounds;
   LOGT("sz[%i,%i]->[%i,%i]", oldBounds.width, oldBounds.height, aWidth, aHeight);
 
-  mBounds.y = 0;
-  mBounds.x = 0;
+  if (mRotation == mozilla::ROTATION_0) {
+    mBounds.x = mMargins.left;
+    mBounds.y = mMargins.top;
+  } else if (mRotation == mozilla::ROTATION_90) {
+    mBounds.x = mMargins.top;
+    mBounds.y = 0;
+  } else if (mRotation == mozilla::ROTATION_180) {
+    mBounds.x = 0;
+    mBounds.y = 0;
+  } else if (mRotation == mozilla::ROTATION_270) {
+    mBounds.x = 0;
+    mBounds.y = mMargins.left;
+  } else {
+    mBounds.x = 0;
+    mBounds.y = 0;
+  }
   mBounds.width = aWidth;
   mBounds.height = aHeight;
 
