@@ -1570,7 +1570,7 @@ EmbedLiteViewChild::WidgetBoundsChanged(const LayoutDeviceIntRect &aSize)
   MOZ_ASSERT(mHelper && mWebBrowser);
 
   nsCOMPtr<nsIBaseWindow> baseWindow = do_QueryInterface(mWebBrowser);
-  baseWindow->SetPositionAndSize(0, 0, aSize.width, aSize.height, true);
+  baseWindow->SetPositionAndSize(aSize.x, aSize.y, aSize.width, aSize.height, true);
 
   mHelper->ReportSizeUpdate(aSize);
 }

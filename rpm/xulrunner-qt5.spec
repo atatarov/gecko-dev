@@ -1,5 +1,5 @@
 %define greversion    78.15.1
-%define milestone     %{greversion}
+%define milestone     %{greversion}a
 
 %define embedlite_config merqtxulrunner
 
@@ -20,8 +20,8 @@
 %define system_libwebp      1
 
 
-%global mozappdir     %{_libdir}/%{name}-%{milestone}
-%global mozappdirdev  %{_libdir}/%{name}-devel-%{milestone}
+%global mozappdir     %{_libdir}/%{name}-%{greversion}
+%global mozappdirdev  %{_libdir}/%{name}-devel-%{greversion}
 
 # Private/bundled libs the final package should not provide or depend on.
 %global privlibs             libfreebl3
@@ -141,6 +141,7 @@ Patch83:    0083-sailfishos-gecko-dev-Disallow-page-zooming-if-the-me.patch
 Patch84:    0084-sailfishos-gecko-Fix-audio-underruns-for-fullduplex-.patch
 Patch85:    0085-sailfishos-gecko-dev-Fix-video-hardware-accelaration.patch
 Patch86:    0086-sailfishos-gecko-Add-preference-to-bypass-CORS-on-ns.patch
+Patch87:    0001-debug.patch
 #Patch20:    0020-sailfishos-loginmanager-Adapt-LoginManager-to-EmbedL.patch
 #Patch51:    0051-sailfishos-gecko-Remove-android-define-from-logging.patch
 #Patch59:    0059-sailfishos-gecko-Ignore-safemode-in-gfxPlatform.-Fix.patch
@@ -441,7 +442,7 @@ echo "ac_add_options --disable-elf-hack" >> "$MOZCONFIG"
 # Additionally we limit the memory usage during linking
 %ifarch %arm32 %arm64
 # Garbage collect on arm to reduce memory requirements, JB#55074
-echo 'FIX_LDFLAGS="-Wl,--strip-debug -Wl,--gc-sections -Wl,--reduce-memory-overheads -Wl,--no-keep-memory -Wl,-rpath=%{mozappdir}"' >> "${MOZCONFIG}"
+echo 'FIX_LDFLAGS="-Wl,--gc-sections -Wl,--reduce-memory-overheads -Wl,--no-keep-memory -Wl,-rpath=%{mozappdir}"' >> "${MOZCONFIG}"
 %else
 echo 'FIX_LDFLAGS="-Wl,--reduce-memory-overheads -Wl,--no-keep-memory -Wl,-rpath=%{mozappdir}"' >> "${MOZCONFIG}"
 %endif

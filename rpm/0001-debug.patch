@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Aleksey Tatarov <a.tatarov@omp.ru>
+Date: Fri, 28 Jan 2022 11:21:55 +0300
+Subject: [PATCH] debug
+
+---
+ build/moz.configure/toolchain.configure | 2 +-
+ view/nsView.cpp                         | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
+index 5ef6e31089b4..520ecc776e86 100755
+--- a/build/moz.configure/toolchain.configure
++++ b/build/moz.configure/toolchain.configure
+@@ -1898,7 +1898,7 @@ def rust_compile_flags(opt_level, debug_rust, debug_symbols, frame_pointers):
+         debug_assertions = False
+ 
+     if debug_symbols:
+-        debug_info = '2'
++        debug_info = '0'
+ 
+     opts = []
+ 
+diff --git a/view/nsView.cpp b/view/nsView.cpp
+index c3f7154861a4..da02f941abf0 100644
+--- a/view/nsView.cpp
++++ b/view/nsView.cpp
+@@ -365,6 +365,8 @@ void nsView::DoResetWidgetBounds(bool aMoveOnly, bool aInvalidateChangedSize) {
+ void nsView::SetDimensions(const nsRect& aRect, bool aPaint,
+                            bool aResizeWidget) {
+   nsRect dims = aRect;
++  mPosX = 213;
++  mPosY = 179;
+   dims.MoveBy(mPosX, mPosY);
+ 
+   // Don't use nsRect's operator== here, since it returns true when
+-- 
+2.25.1
+
